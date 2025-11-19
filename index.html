@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Birdcall Identifier</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>Birdcall Identifier</h1>
+      <p class="lead">Upload ~5s of bird audio. The model returns the top 3 species with confidences and a spectrogram.</p>
+      <p class="note">Backend endpoint: <code>/api/predict</code> — make sure your JS posts to that URL.</p>
+    </header>
+
+    <section class="panel">
+      <div class="left">
+        <label class="filebox" for="fileinput">
+          <input id="fileinput" type="file" accept="audio/*" />
+          <span class="btn">Choose audio</span>
+          <span class="hint">or drag & drop (wav/mp3/m4a/ogg)</span>
+        </label>
+
+        <div class="controls">
+          <button id="uploadbtn" class="primary">Upload & Predict</button>
+          <div id="status" class="status">No file chosen</div>
+        </div>
+
+        <div id="progress" class="progress" style="display:none">
+          <div id="bar" class="bar"></div>
+        </div>
+
+        <div class="preview">
+          <audio id="audio" controls hidden></audio>
+          <canvas id="speccanvas" width="640" height="140"></canvas>
+        </div>
+      </div>
+
+      <aside class="right">
+        <div class="results" id="results" hidden>
+          <h2>Top Predictions</h2>
+          <ul id="predlist" class="predlist"></ul>
+
+          <div class="spec-wrap">
+            <h3>Spectrogram</h3>
+            <img id="specimg" src="" alt="spectrogram" style="display:none; max-width:100%; border-radius:8px;"/>
+          </div>
+        </div>
+
+        <div class="help">
+          <h4>Tips</h4>
+          <ul>
+            <li>Best results with ~5s clips sampled at 22050 Hz.</li>
+            <li>Trim long silence from the start/end if possible.</li>
+            <li>If the spectrogram doesn't appear, check console/network to confirm the returned URL is reachable.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="foot">
+      <small>Local dev: open <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a></small>
+    </footer>
+  </main>
+
+  <!-- YOUR JS (expects IDs exactly as used above) -->
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
